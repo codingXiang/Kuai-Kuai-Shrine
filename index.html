@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>綠色精緻動態乖乖 ✦ 奶油椰子造句包 | Kuai Kuai Green Guardian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            kuai: {
+              green: '#10b981',
+              emerald: '#059669',
+              lime: '#70b338',
+              limeBg: '#8bc53f',
+              darkGreen: '#235e16',
+              bright: '#00ff88',
+              gold: '#fbbf24',
+              bg: '#040d07',
+              card: '#0a1a12',
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            hand: ['"Kalam"', '"Noto Sans TC"', 'cursive'],
+          },
+          animation: {
+            'float': 'floating 4.5s ease-in-out infinite',
+            'pulse-green': 'pulseGlow 2.5s infinite',
+            'shimmer': 'shimmer 4s infinite',
+            'ray': 'rayRotate 35s linear infinite',
+            'traffic-glow': 'trafficGlow 1.5s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            floating: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 25px rgba(0, 255, 136, 0.4))' },
+              '50%': { opacity: '0.85', filter: 'drop-shadow(0 0 55px rgba(0, 255, 136, 0.8))' },
+            },
+            rayRotate: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            shimmer: {
+              '0%': { transform: 'translateX(-180%) rotate(25deg)' },
+              '100%': { transform: 'translateX(220%) rotate(25deg)' },
+            },
+            trafficGlow: {
+              '0%': { filter: 'drop-shadow(0 0 4px #00ff88) drop-shadow(0 0 12px #00ff88)' },
+              '100%': { filter: 'drop-shadow(0 0 10px #00ff88) drop-shadow(0 0 24px #34d399)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040d07;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #064e3b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #10b981;
+    }
+
+    /* 3D Flip Card Styles */
+    .perspective-1200 {
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+    }
+    .bag-float-wrapper {
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+    }
+    .bag-tilt-wrapper {
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+    .bag-flipper {
+      position: relative;
+      width: 100%;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.34, 1.25, 0.64, 1);
+    }
+    .bag-flipper.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .bag-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      border-radius: 1rem;
+    }
+    .bag-front {
+      transform: rotateY(0deg) translateZ(1px);
+      -webkit-transform: rotateY(0deg) translateZ(1px);
+      z-index: 2;
+    }
+    .bag-back {
+      transform: rotateY(180deg) translateZ(1px);
+      -webkit-transform: rotateY(180deg) translateZ(1px);
+      z-index: 1;
+    }
+
+    /* Package Serrated Zig-Zag Edges (真實包裝鋸齒邊緣) */
+    .serrated-edge-top {
+      background: radial-gradient(circle at 50% 0%, transparent 4px, #4d9a26 4.5px);
+      background-size: 10px 10px;
+      background-repeat: repeat-x;
+    }
+    .serrated-edge-bottom {
+      background: radial-gradient(circle at 50% 100%, transparent 4px, #3a791a 4.5px);
+      background-size: 10px 10px;
+      background-repeat: repeat-x;
+    }
+
+    /* Crimp Lines */
+    .crimp-lines-top {
+      background: repeating-linear-gradient(
+        90deg,
+        #489422,
+        #489422 3px,
+        #3b7b1c 3px,
+        #3b7b1c 6px,
+        #65b736 6px,
+        #65b736 7px,
+        #346b17 7px,
+        #346b17 9px
+      );
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -2px 3px rgba(0,0,0,0.3);
+    }
+    .crimp-lines-bottom {
+      background: repeating-linear-gradient(
+        90deg,
+        #489422,
+        #489422 3px,
+        #3b7b1c 3px,
+        #3b7b1c 6px,
+        #65b736 6px,
+        #65b736 7px,
+        #346b17 7px,
+        #346b17 9px
+      );
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.4), inset 0 -2px 3px rgba(0,0,0,0.3);
+    }
+
+    /* Metallic Foil Sheen Overlay */
+    .foil-sheen {
+      background: linear-gradient(
+        115deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.05) 30%,
+        rgba(255,255,255,0.3) 45%,
+        rgba(255,255,255,0.55) 50%,
+        rgba(255,255,255,0.15) 55%,
+        rgba(255,255,255,0) 75%
+      );
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    /* Background Particle Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glass Panels */
+    .glass-panel {
+      background: rgba(10, 26, 18, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+    }
+    .glass-panel-hover:hover {
+      border-color: rgba(0, 255, 136, 0.5);
+      box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
+    }
+
+    /* Green Sacred Glow Ring */
+    .holy-aura {
+      background: radial-gradient(circle, rgba(0,255,136,0.3) 0%, rgba(16,185,129,0.12) 40%, rgba(4,13,7,0) 70%);
+    }
+
+    /* LED blink */
+    .led-blink {
+      animation: ledFlash 1.2s infinite ease-in-out;
+    }
+    @keyframes ledFlash {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #00ff88); }
+      50% { opacity: 0.3; filter: drop-shadow(0 0 1px #00ff88); }
+    }
+
+    /* Dotted line input field styling */
+    .dotted-line-text {
+      background-image: repeating-linear-gradient(to right, #94a3b8 0, #94a3b8 5px, transparent 5px, transparent 10px);
+      background-position: bottom;
+      background-size: 100% 2px;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body class="bg-kuai-bg text-emerald-100 min-h-screen overflow-x-hidden font-sans selection:bg-kuai-green selection:text-black">
+
+  <!-- Background Particle Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Top Navigation / Shrine Control Bar -->
+  <header class="relative z-30 flex items-center justify-between px-6 py-4 border-b border-emerald-950/80 glass-panel">
+    <div class="flex items-center gap-3">
+      <div class="relative w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 via-lime-500 to-green-400 p-0.5 shadow-lg shadow-emerald-500/30">
+        <div class="w-full h-full bg-black rounded-full flex items-center justify-center">
+          <span class="text-kuai-bright text-lg font-black">乖</span>
+        </div>
+        <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-kuai-bright rounded-full border-2 border-black led-blink"></span>
+      </div>
+      <div>
+        <h1 class="text-lg md:text-xl font-black tracking-wider text-white flex items-center gap-2">
+          <span>乖乖造句包 ✦ 綠色極致守護神殿</span>
+          <span class="text-[10px] font-mono bg-emerald-950 text-kuai-bright border border-emerald-700/60 px-2 py-0.5 rounded-full font-bold">SINCE 1968</span>
+        </h1>
+        <p class="text-[11px] text-emerald-400/80 font-mono">奶油椰子口味 • 綠燈亮起 • 點擊包裝可3D翻轉背面</p>
+      </div>
+    </div>
+
+    <!-- Quick Actions Header -->
+    <div class="flex items-center gap-3">
+      <!-- 3D Flip Quick Button -->
+      <button id="btn-quick-flip" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-500/60 bg-emerald-950/70 hover:bg-emerald-800 text-kuai-bright text-xs font-mono font-bold transition active:scale-95 shadow-md shadow-emerald-950">
+        <svg class="w-4 h-4 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+        <span id="flip-btn-text">翻轉包裝 (正面/背面)</span>
+      </button>
+
+      <!-- Audio Toggle -->
+      <button id="audio-btn" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-emerald-800/80 bg-emerald-950/50 hover:bg-emerald-900/40 text-emerald-300 text-xs font-mono transition">
+        <svg id="audio-icon-on" class="w-4 h-4 text-kuai-bright hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+        </svg>
+        <svg id="audio-icon-off" class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+        </svg>
+        <span id="audio-text">音效: 關</span>
+      </button>
+
+      <!-- ASCII Art Toggle -->
+      <button id="ascii-toggle-btn" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-800/80 bg-emerald-950/50 hover:bg-emerald-900/40 text-emerald-300 text-xs font-mono transition">
+        <span class="text-kuai-bright">&gt;_</span>
+        <span>ASCII 終端</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Showcase Container -->
+  <main class="relative z-10 max-w-7xl mx-auto px-4 py-8 lg:py-10 flex flex-col gap-10">
+    
+    <!-- Hero Section: Control Deck & 3D Interactive Flippable Bag -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Left Column: Shrine Realtime Telemetry & Offering Buttons -->
+      <div class="lg:col-span-3 flex flex-col gap-4 order-2 lg:order-1">
+        
+        <!-- Live Telemetry Card -->
+        <div class="glass-panel rounded-2xl p-5 border border-emerald-900/80 shadow-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-emerald-900/50 pb-2">
+            <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-kuai-bright led-blink"></span>
+              機房遙測守護指標
+            </span>
+            <span class="text-[10px] font-mono text-kuai-bright bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-800">ALL GREEN</span>
+          </div>
+
+          <div class="space-y-3 font-mono text-xs">
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-emerald-400/80">交通號誌綠燈率 (Traffic Light)</span>
+                <span class="text-kuai-bright font-bold">100.0% 綠燈</span>
+              </div>
+              <div class="h-2 w-full bg-emerald-950 rounded-full overflow-hidden border border-emerald-900">
+                <div class="h-full bg-gradient-to-r from-lime-500 via-emerald-400 to-kuai-bright w-full rounded-full animate-pulse"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-emerald-400/80">造句加持護體力 (Sentence Power)</span>
+                <span class="text-kuai-bright font-bold" id="field-power">MAX 9999+</span>
+              </div>
+              <div class="h-2 w-full bg-emerald-950 rounded-full overflow-hidden border border-emerald-900">
+                <div class="h-full bg-gradient-to-r from-yellow-400 via-emerald-400 to-kuai-bright w-full rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1 text-center">
+              <div class="p-2 rounded-xl bg-black/50 border border-emerald-950">
+                <div class="text-[10px] text-emerald-500">已消除 BUG 數</div>
+                <div class="text-lg font-bold text-kuai-bright font-mono" id="bugs-cleared">2,048</div>
+              </div>
+              <div class="p-2 rounded-xl bg-black/50 border border-emerald-950">
+                <div class="text-[10px] text-emerald-500">卡片翻轉摸摸次數</div>
+                <div class="text-lg font-bold text-kuai-bright font-mono" id="worship-count">888</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] leading-relaxed text-emerald-300">
+            <span class="text-kuai-bright font-bold">💡 翻轉提示：</span>直接點擊中間的乖乖包裝，或下方翻面按鈕，可無死角查看正反面包裝！
+          </div>
+        </div>
+
+        <!-- Sacred Actions -->
+        <div class="glass-panel rounded-2xl p-5 border border-emerald-900/80 space-y-2.5">
+          <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 mb-1">
+            <span>🎋 神殿祈福儀式</span>
+          </div>
+          
+          <button id="btn-pray" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 via-lime-600 to-green-500 hover:from-emerald-500 hover:to-kuai-bright text-black font-bold text-xs tracking-wider shadow-lg shadow-emerald-500/20 active:scale-95 transition flex items-center justify-center gap-2">
+            <span>🙏 摸摸乖乖（虔誠加持）</span>
+          </button>
+          
+          <button id="btn-flip-card" class="w-full py-2.5 px-4 rounded-xl bg-black/60 hover:bg-emerald-900/50 border border-emerald-500/70 text-kuai-bright font-bold text-xs tracking-wider active:scale-95 transition flex items-center justify-center gap-2">
+            <span>🔄 3D 翻轉卡片看背面</span>
+          </button>
+
+          <button id="btn-holy-wave" class="w-full py-2.5 px-4 rounded-xl bg-black/60 hover:bg-emerald-900/50 border border-emerald-700/60 text-emerald-200 hover:text-white font-bold text-xs tracking-wider active:scale-95 transition flex items-center justify-center gap-2">
+            <span>⚡ 釋放全螢幕綠光結界</span>
+          </button>
+
+          <button id="btn-spawn-puff" class="w-full py-2.5 px-4 rounded-xl bg-black/60 hover:bg-emerald-900/50 border border-emerald-700/60 text-emerald-200 hover:text-white font-bold text-xs tracking-wider active:scale-95 transition flex items-center justify-center gap-2">
+            <span>✨ 撒下酥脆椰子米果</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Center Column: The Authentic 3D Flippable Kuai Kuai Snack Pack -->
+      <div class="lg:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2 perspective-1200 relative py-4 select-none">
+        
+        <!-- Sacred Glowing Aura in background -->
+        <div class="absolute w-[380px] md:w-[500px] h-[380px] md:h-[500px] rounded-full holy-aura animate-pulse-green pointer-events-none -z-10"></div>
+        <div class="absolute w-[340px] md:w-[440px] h-[340px] md:h-[440px] rounded-full border border-kuai-bright/20 animate-ray pointer-events-none -z-10" style="background: conic-gradient(from 0deg, transparent 0deg, rgba(0,255,136,0.12) 20deg, transparent 40deg, rgba(0,255,136,0.12) 60deg, transparent 80deg, rgba(0,255,136,0.12) 100deg, transparent 120deg, rgba(0,255,136,0.12) 140deg, transparent 160deg, rgba(0,255,136,0.12) 180deg, transparent 200deg, rgba(0,255,136,0.12) 220deg, transparent 240deg, rgba(0,255,136,0.12) 260deg, transparent 280deg, rgba(0,255,136,0.12) 300deg, transparent 320deg, rgba(0,255,136,0.12) 340deg, transparent 360deg);"></div>
+
+        <!-- 3D Flipping Card Container -->
+        <div id="bag-container" class="relative w-[320px] sm:w-[350px] md:w-[380px] cursor-pointer group">
+          
+          <!-- Float Animation Layer -->
+          <div class="bag-float-wrapper animate-float">
+            <!-- Parallax Tilt Layer -->
+            <div id="bag-tilt" class="bag-tilt-wrapper">
+              <!-- 180deg Flip Layer -->
+              <div id="bag-flipper" class="bag-flipper h-[590px] md:h-[615px]">
+                
+                <!-- ================= FRONT SIDE (正面：乖乖造句包 奶油椰子口味) ================= -->
+                <div class="bag-face bag-front overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,255,136,0.35),0_0_80px_rgba(77,154,38,0.4)] border-2 border-lime-400/40 bg-gradient-to-b from-[#6fb236] via-[#7cb93b] to-[#5a9c29] flex flex-col justify-between">
+              
+              <!-- Foil Sheen & Metallic Specular Overlay -->
+              <div id="foil-front" class="foil-sheen absolute inset-0 z-30 transition-opacity duration-300 opacity-70 pointer-events-none"></div>
+              <div class="absolute -inset-full bg-gradient-to-r from-transparent via-white/20 to-transparent rotate-25 animate-shimmer pointer-events-none z-30"></div>
+
+              <!-- Top Serrated Zig-Zag Edge & Crimp Lines -->
+              <div class="relative z-20">
+                <div class="serrated-edge-top h-3 w-full"></div>
+                <div class="crimp-lines-top h-5 w-full flex items-center justify-between px-3 border-b border-black/20">
+                  <span class="text-[8px] font-mono text-lime-900/80 tracking-widest uppercase">★★★★★ KUAI KUAI ★★★★★</span>
+                </div>
+              </div>
+
+              <!-- Main Front Graphic Area -->
+              <div class="relative px-3.5 py-2 z-10 flex-1 flex flex-col justify-between overflow-hidden">
+                
+                <!-- Subtle Authentic Background Watermarks ("Smoothly", "all right", "綠色乖乖讓我天天順心") -->
+                <div class="absolute inset-0 opacity-15 pointer-events-none select-none font-bold text-lime-950 flex flex-col justify-around text-[13px] leading-tight px-2 transform -rotate-6">
+                  <div>all right • Smoothly • 綠色乖乖讓我天天順心 • 綠色金順</div>
+                  <div>綠色乖乖 • 萬事順利 • 程式無Bug • 伺服器綠燈常亮</div>
+                  <div>all right • Smoothly • 綠色乖乖讓我天天順心 • 綠色金順</div>
+                  <div>綠色乖乖 • 萬事順利 • 程式無Bug • 伺服器綠燈常亮</div>
+                </div>
+
+                <!-- Top Header Row: Logo, "造句包", and Award Badges -->
+                <div class="flex items-start justify-between z-10 relative">
+                  <!-- Left: Red Circular Logo "乖乖 SINCE 1968" -->
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-14 h-14 rounded-full bg-red-600 border-2 border-white shadow-md flex flex-col items-center justify-center text-white transform -rotate-3">
+                      <span class="text-[17px] font-black leading-none tracking-tighter drop-shadow">乖乖</span>
+                      <span class="text-[6.5px] font-bold tracking-tighter mt-0.5 text-yellow-200">SINCE 1968</span>
+                      <span class="text-[6px] absolute top-1 right-1 font-sans">®</span>
+                    </div>
+
+                    <!-- "造句包" Title with Yellow/Black Outline -->
+                    <div class="relative pl-1">
+                      <div class="text-2xl sm:text-3xl font-black text-yellow-300 drop-shadow-[0_2px_0_#1e3a10] tracking-wider" style="-webkit-text-stroke: 1.5px #1c380e;">
+                        造句包
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right: Clean Label & International Awards (Monde Selection & Taste Award) -->
+                  <div class="flex items-center gap-1">
+                    <!-- Clean Label TIC -->
+                    <div class="bg-white/95 rounded px-1 py-0.5 border border-emerald-700 shadow text-[7px] text-center font-bold text-emerald-800 leading-none">
+                      <div class="text-[8px] text-orange-500 font-black">CLEAN</div>
+                      <div>慈悅TIC</div>
+                    </div>
+                    <!-- Monde Selection Medal -->
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-b from-slate-200 to-slate-400 border border-slate-500 flex flex-col items-center justify-center text-[5.5px] font-bold text-slate-800 text-center leading-none shadow">
+                      <span>MONDE</span>
+                      <span class="text-[5px]">SILVER</span>
+                    </div>
+                    <!-- Taste Award Ribbon -->
+                    <div class="w-7 h-9 bg-purple-900 border border-purple-700 text-yellow-300 rounded-b flex flex-col items-center justify-center text-[5px] font-black leading-none shadow">
+                      <span>SUPERIOR</span>
+                      <span class="text-[6px] text-white">TASTE</span>
+                      <span class="text-[5px] text-yellow-400">★★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Purple Ribbon: "法國進口非基因改造玉米" -->
+                <div class="relative z-10 -mt-1 transform -rotate-2">
+                  <div class="inline-flex items-center gap-1 bg-gradient-to-r from-purple-800 via-indigo-700 to-blue-700 text-white text-[9.5px] font-bold px-3 py-0.5 rounded-r-full shadow border-l-4 border-yellow-300">
+                    <span class="text-yellow-300">✦</span>
+                    <span>法國進口非基因改造玉米</span>
+                  </div>
+                </div>
+
+                <!-- Center Area: Mascot holding Traffic Light + Coconut Flavor Badge -->
+                <div class="relative z-10 flex items-center justify-between -mt-1">
+                  
+                  <!-- Left: Flavor Badge "奶油椰子 口味" with Coconut Illustration -->
+                  <div class="w-24 h-24 rounded-full bg-gradient-to-b from-emerald-800 to-green-950 border-2 border-white shadow-lg p-1 flex flex-col items-center justify-center text-center text-white transform -rotate-6 z-20">
+                    <!-- Coconut SVG -->
+                    <svg viewBox="0 0 50 35" class="w-10 h-7 drop-shadow">
+                      <ellipse cx="25" cy="18" rx="16" ry="12" fill="#582f0e" />
+                      <ellipse cx="25" cy="18" rx="13" ry="9" fill="#ffffff" />
+                      <ellipse cx="25" cy="18" rx="9" ry="6" fill="#fef3c7" />
+                      <!-- Coconut green outer shell -->
+                      <path d="M 9 18 A 16 12 0 0 0 41 18" fill="#4d7c0f" opacity="0.8" />
+                    </svg>
+                    <div class="text-[11px] font-black leading-tight text-white mt-0.5">奶油椰子</div>
+                    <div class="text-[8px] text-yellow-300 font-bold">口 味</div>
+                  </div>
+
+                  <!-- Mascot: Smiling Boy holding GREEN TRAFFIC LIGHT -->
+                  <div class="relative w-44 h-44 -mr-2">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]">
+                      <defs>
+                        <radialGradient id="faceGrad2" cx="50%" cy="40%" r="50%">
+                          <stop offset="0%" stop-color="#fed7aa"/>
+                          <stop offset="85%" stop-color="#fdba74"/>
+                          <stop offset="100%" stop-color="#fb923c"/>
+                        </radialGradient>
+                        <linearGradient id="hatGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#1e40af"/>
+                          <stop offset="50%" stop-color="#1d4ed8"/>
+                          <stop offset="100%" stop-color="#0f172a"/>
+                        </linearGradient>
+                      </defs>
+
+                      <!-- Blue Pirate / Tricorne Hat -->
+                      <path d="M 30 75 C 20 40, 140 20, 175 75 C 130 65, 70 65, 30 75 Z" fill="url(#hatGrad2)" stroke="#0f172a" stroke-width="2" />
+                      <!-- Hat top cone & red pom-pom -->
+                      <circle cx="120" cy="38" r="14" fill="#dc2626" stroke="#991b1b" stroke-width="2" />
+                      <path d="M 60 70 Q 100 35 140 68 Z" fill="url(#hatGrad2)" />
+
+                      <!-- Mascot Boy Face -->
+                      <ellipse cx="98" cy="106" rx="36" ry="32" fill="url(#faceGrad2)" stroke="#7c2d12" stroke-width="2" />
+                      
+                      <!-- Ears -->
+                      <circle cx="62" cy="105" r="9" fill="url(#faceGrad2)" stroke="#7c2d12" stroke-width="1.5" />
+                      <circle cx="134" cy="105" r="9" fill="url(#faceGrad2)" stroke="#7c2d12" stroke-width="1.5" />
+
+                      <!-- Eyebrows & Joyful Big Eyes -->
+                      <path d="M 75 88 Q 83 80 91 87" fill="none" stroke="#7c2d12" stroke-width="2.5" stroke-linecap="round" />
+                      <path d="M 105 88 Q 113 80 121 87" fill="none" stroke="#7c2d12" stroke-width="2.5" stroke-linecap="round" />
+                      
+                      <ellipse cx="83" cy="97" rx="5.5" ry="8" fill="#0f172a" />
+                      <circle cx="81.5" cy="94" r="2.5" fill="#ffffff" />
+                      <ellipse cx="113" cy="97" rx="5.5" ry="8" fill="#0f172a" />
+                      <circle cx="111.5" cy="94" r="2.5" fill="#ffffff" />
+
+                      <!-- Nose -->
+                      <ellipse cx="98" cy="103" rx="4" ry="2.5" fill="#ea580c" />
+
+                      <!-- Big Joyful Open Bucktooth Smile -->
+                      <path d="M 76 109 Q 98 135 120 109 Z" fill="#881337" stroke="#7c2d12" stroke-width="2" />
+                      <!-- Iconic Big Front Buckteeth -->
+                      <rect x="91" y="109" width="7" height="9" rx="1.5" fill="#ffffff" stroke="#7c2d12" stroke-width="1.2" />
+                      <rect x="98" y="109" width="7" height="9" rx="1.5" fill="#ffffff" stroke="#7c2d12" stroke-width="1.2" />
+                      <!-- Pink Tongue -->
+                      <path d="M 89 124 Q 98 118 107 124 Q 98 131 89 124 Z" fill="#fb7185" />
+
+                      <!-- Mascot Orange Clothes & Yellow Ribbon -->
+                      <path d="M 65 138 C 65 138, 98 132, 131 138 L 135 170 L 61 170 Z" fill="#ea580c" stroke="#9a3412" stroke-width="1.5" />
+                      <!-- Green Sash "綠色乖乖" -->
+                      <path d="M 80 138 L 125 170 L 112 170 L 68 138 Z" fill="#16a34a" />
+                      <circle cx="98" cy="138" r="6" fill="#facc15" />
+
+                      <!-- Left Waving Hand -->
+                      <g transform="translate(48, 115) rotate(-15)">
+                        <circle cx="8" cy="8" r="9" fill="url(#faceGrad2)" stroke="#7c2d12" stroke-width="1.5" />
+                        <!-- Fingers -->
+                        <path d="M 2 4 Q 0 -4 4 -3" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round" />
+                        <path d="M 6 2 Q 6 -6 10 -4" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round" />
+                        <path d="M 11 4 Q 14 -3 16 -1" fill="none" stroke="#7c2d12" stroke-width="2" stroke-linecap="round" />
+                      </g>
+
+                      <!-- Right Hand Holding the TRAFFIC LIGHT with ALL-GREEN LAMP -->
+                      <!-- Traffic Light Pole & Body -->
+                      <g transform="translate(148, 70)">
+                        <!-- Pole -->
+                        <rect x="6" y="38" width="5" height="70" fill="#334155" />
+                        <!-- Traffic Box -->
+                        <rect x="-1" y="-5" width="19" height="48" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" />
+                        
+                        <!-- Red Lamp (OFF) -->
+                        <circle cx="8.5" cy="4" r="5" fill="#450a0a" stroke="#1f2937" stroke-width="1" />
+                        <!-- Yellow Lamp (OFF) -->
+                        <circle cx="8.5" cy="18" r="5" fill="#422006" stroke="#1f2937" stroke-width="1" />
+                        <!-- Green Lamp (BRIGHT ACTIVE WITH GLOW & RAYS!) -->
+                        <circle cx="8.5" cy="32" r="6" fill="#00ff88" stroke="#ffffff" stroke-width="1.5" class="animate-traffic-glow" />
+                        <!-- Green radiant sparks -->
+                        <path d="M -5 32 L -1 32 M 18 32 L 22 32 M 8.5 40 L 8.5 44 M 0 24 L -3 21 M 17 24 L 20 21" stroke="#00ff88" stroke-width="2" stroke-linecap="round" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Bottom Center: The Iconic "造句留言板" (White Sentence Making Card) -->
+                <div id="sentence-card-board" class="w-full bg-white text-black rounded-xl p-3 shadow-lg border-2 border-dashed border-emerald-600/70 relative z-20 transition-all duration-300">
+                  
+                  <!-- 3 Top Green Hole Punches -->
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <span class="w-3 h-3 rounded-full bg-lime-500 border border-emerald-800 shadow-inner inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-lime-500 border border-emerald-800 shadow-inner inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-lime-500 border border-emerald-800 shadow-inner inline-block"></span>
+                  </div>
+
+                  <!-- Center Red "乖乖" Title -->
+                  <div class="text-center">
+                    <span class="text-2xl sm:text-3xl font-black text-red-600 tracking-wider inline-block transform hover:scale-105 transition-transform drop-shadow-[0_1px_1px_rgba(0,0,0,0.2)]">
+                      乖乖
+                    </span>
+                  </div>
+
+                  <!-- Sentence Dotted Lines with User Custom Text -->
+                  <div class="my-1.5 space-y-2">
+                    <div class="dotted-line-text pb-1 min-h-[24px] flex items-center justify-center">
+                      <span id="board-line-1" class="text-xs sm:text-sm font-hand text-blue-900 font-bold tracking-wide text-center px-1">
+                        讓伺服器綠燈常亮，
+                      </span>
+                    </div>
+                    <div class="dotted-line-text pb-1 min-h-[24px] flex items-center justify-center">
+                      <span id="board-line-2" class="text-xs sm:text-sm font-hand text-blue-900 font-bold tracking-wide text-center px-1">
+                        上線 0 故障，代碼 0 BUG！
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Tagline: "你一句 我一句 請用乖乖造個句" + Bottom 2 Hole Punches -->
+                  <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200">
+                    <span class="text-[9.5px] font-bold text-blue-700 tracking-tight">
+                      你一句 我一句 請用<strong class="text-red-600 font-black">乖乖</strong>造個句
+                    </span>
+                    <div class="flex items-center gap-1">
+                      <span class="w-2.5 h-2.5 rounded-full bg-lime-500 border border-emerald-800 inline-block"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-lime-500 border border-emerald-800 inline-block"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Bottom Bag Badges & Crimp Edge -->
+              <div class="relative z-20">
+                <!-- "綠 色 金 順" Badges -->
+                <div class="flex items-center justify-center gap-2 py-1 bg-lime-700/60 text-white text-[10px] font-bold tracking-widest font-mono border-t border-black/20">
+                  <span class="bg-emerald-800 px-1.5 py-0.5 rounded border border-emerald-500 text-yellow-300">綠</span>
+                  <span class="bg-emerald-800 px-1.5 py-0.5 rounded border border-emerald-500 text-yellow-300">色</span>
+                  <span class="bg-yellow-500 text-emerald-950 px-1.5 py-0.5 rounded border border-yellow-200">金</span>
+                  <span class="bg-yellow-500 text-emerald-950 px-1.5 py-0.5 rounded border border-yellow-200">順</span>
+                </div>
+                <!-- Bottom Crimp Lines & Serrated Edge -->
+                <div class="crimp-lines-bottom h-5 w-full flex items-center justify-between px-4 border-t border-black/30">
+                  <span class="text-[8px] font-mono text-lime-950 uppercase">MADE IN TAIWAN</span>
+                  <span class="text-[8px] font-mono text-lime-950">淨重: 無限吉利</span>
+                </div>
+                <div class="serrated-edge-bottom h-3 w-full"></div>
+              </div>
+
+            </div>
+
+
+            <!-- ================= BACK SIDE (背面：工程師玄學守護規格 & 營養標示) ================= -->
+            <div class="bag-face bag-back overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,255,136,0.35),0_0_80px_rgba(77,154,38,0.4)] border-2 border-lime-400/40 bg-gradient-to-b from-[#5c9e2b] via-[#6ca934] to-[#4c8721] flex flex-col justify-between text-slate-900">
+              
+              <!-- Foil Sheen Overlay for back -->
+              <div id="foil-back" class="foil-sheen absolute inset-0 z-30 transition-opacity duration-300 opacity-70 pointer-events-none"></div>
+
+              <!-- Top Crimp & Serrated Edge -->
+              <div class="relative z-20">
+                <div class="serrated-edge-top h-3 w-full"></div>
+                <div class="crimp-lines-top h-5 w-full flex items-center justify-between px-3 border-b border-black/20">
+                  <span class="text-[8px] font-mono text-lime-950 uppercase tracking-wider">★ IT SHRINE SPECIFICATION SHEET ★</span>
+                </div>
+              </div>
+
+              <!-- Back Main Content -->
+              <div class="relative px-3.5 py-2.5 z-10 flex-1 flex flex-col justify-between text-[11px] overflow-hidden">
+                
+                <!-- Top Brand Banner & Title -->
+                <div class="flex items-center justify-between border-b border-black/20 pb-1.5">
+                  <div class="flex items-center gap-1.5">
+                    <div class="bg-red-600 text-white font-black text-xs px-2 py-0.5 rounded-full border border-yellow-300 shadow">
+                      乖乖
+                    </div>
+                    <span class="text-xs font-black text-lime-950">奶油椰子風味 • 科技守護包</span>
+                  </div>
+                  <span class="text-[9px] font-mono bg-black/30 text-white px-2 py-0.5 rounded-full">
+                    機房專用規格
+                  </span>
+                </div>
+
+                <!-- Nutrition Facts & Ingredients Grid -->
+                <div class="grid grid-cols-12 gap-2 my-1">
+                  
+                  <!-- Left: Nutrition Table (營養標示) -->
+                  <div class="col-span-6 bg-white/95 rounded-lg p-2 border border-black/40 text-[9px] font-mono shadow-sm">
+                    <div class="text-center font-bold border-b border-black pb-0.5 mb-1 text-[10px]">
+                      營 養 標 示
+                    </div>
+                    <div class="flex justify-between text-[8.5px] border-b border-slate-300 pb-0.5">
+                      <span>每一份量</span>
+                      <span>1 包 (永恆)</span>
+                    </div>
+                    <div class="space-y-0.5 pt-1 text-[8.5px]">
+                      <div class="flex justify-between font-bold text-emerald-800">
+                        <span>熱量 (Calories)</span>
+                        <span>0 大卡</span>
+                      </div>
+                      <div class="flex justify-between font-bold text-red-600">
+                        <span>當機率 (Crash Rate)</span>
+                        <span>0.00 %</span>
+                      </div>
+                      <div class="flex justify-between font-bold text-emerald-600">
+                        <span>綠燈率 (Green Rate)</span>
+                        <span>100 %</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span>椰香順心因子</span>
+                        <span>999 mg</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span>玄學護體能量</span>
+                        <span>∞ 無上限</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right: Product Specs & Warning Notice -->
+                  <div class="col-span-6 bg-white/90 rounded-lg p-2 border border-black/40 text-[9px] space-y-1 shadow-sm flex flex-col justify-between">
+                    <div>
+                      <div class="font-bold text-emerald-950 border-b border-slate-300 pb-0.5">
+                        【品名】神級綠色乖乖
+                      </div>
+                      <div class="text-slate-700 text-[8px] leading-tight mt-0.5">
+                        【主成分】法國非基改玉米、天然椰子粉、零Bug光波、工程師虔誠祈願。
+                      </div>
+                    </div>
+                    
+                    <div class="bg-red-100 border border-red-400 p-1 rounded text-[8px] text-red-800 font-bold leading-tight">
+                      ⚠️ 警告：嚴禁撕開食用！撕開將破壞機房綠燈結界！
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Certificate & Official Barcode Area -->
+                <div class="bg-white/95 rounded-lg p-2 border border-black/40 shadow-sm space-y-1.5">
+                  <div class="flex items-center justify-between text-[9px] font-mono text-slate-700">
+                    <span>有效日期: <strong>2099/12/31 (永不過期)</strong></span>
+                    <span>原產地: <strong>台灣 (Made in Taiwan)</strong></span>
+                  </div>
+
+                  <!-- Barcode & QR Stamp -->
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-300">
+                    <!-- Laser Barcode -->
+                    <div class="flex flex-col items-center">
+                      <svg viewBox="0 0 160 38" class="w-32 h-7">
+                        <rect x="0" y="0" width="3" height="30" fill="#000" />
+                        <rect x="5" y="0" width="2" height="30" fill="#000" />
+                        <rect x="9" y="0" width="4" height="30" fill="#000" />
+                        <rect x="16" y="0" width="2" height="30" fill="#000" />
+                        <rect x="20" y="0" width="5" height="30" fill="#000" />
+                        <rect x="28" y="0" width="2" height="30" fill="#000" />
+                        <rect x="33" y="0" width="4" height="30" fill="#000" />
+                        <rect x="40" y="0" width="3" height="30" fill="#000" />
+                        <rect x="46" y="0" width="6" height="30" fill="#000" />
+                        <rect x="55" y="0" width="2" height="30" fill="#000" />
+                        <rect x="60" y="0" width="4" height="30" fill="#000" />
+                        <rect x="68" y="0" width="2" height="30" fill="#000" />
+                        <rect x="73" y="0" width="5" height="30" fill="#000" />
+                        <rect x="82" y="0" width="2" height="30" fill="#000" />
+                        <rect x="88" y="0" width="4" height="30" fill="#000" />
+                        <rect x="95" y="0" width="3" height="30" fill="#000" />
+                        <rect x="102" y="0" width="5" height="30" fill="#000" />
+                        <rect x="110" y="0" width="2" height="30" fill="#000" />
+                        <rect x="115" y="0" width="4" height="30" fill="#000" />
+                        <rect x="122" y="0" width="3" height="30" fill="#000" />
+                        <rect x="128" y="0" width="6" height="30" fill="#000" />
+                        <rect x="138" y="0" width="2" height="30" fill="#000" />
+                        <rect x="143" y="0" width="4" height="30" fill="#000" />
+                        <rect x="150" y="0" width="4" height="30" fill="#000" />
+                        <text x="15" y="37" font-family="monospace" font-size="7">4 710088 001968</text>
+                      </svg>
+                    </div>
+
+                    <!-- Seal of Approval -->
+                    <div class="w-12 h-12 rounded-full border-2 border-emerald-700 bg-emerald-50 text-emerald-900 flex flex-col items-center justify-center text-[6px] font-black leading-none text-center transform -rotate-12">
+                      <span class="text-[7px]">★ 認證 ★</span>
+                      <span>工程師</span>
+                      <span>指定御用</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Click to Flip Back Instruction -->
+                <div class="text-center py-1 bg-black/40 text-white text-[10px] rounded-lg font-mono flex items-center justify-center gap-1.5 animate-pulse">
+                  <span>🔄 點擊任意處翻回包裝正面</span>
+                </div>
+
+              </div>
+
+              <!-- Bottom Crimp & Serrated Edge -->
+              <div class="relative z-20">
+                <div class="crimp-lines-bottom h-5 w-full flex items-center justify-between px-4 border-t border-black/30">
+                  <span class="text-[8px] font-mono text-lime-950">CUSTOMER SERVICE: 0800-BUG-FREE</span>
+                  <span class="text-[8px] font-mono text-lime-950">TAIWAN NO.1</span>
+                </div>
+                <div class="serrated-edge-bottom h-3 w-full"></div>
+              </div>
+
+            </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom desk shadow with tilt reaction -->
+          <div id="desk-shadow" class="w-3/4 mx-auto h-4 bg-black/60 blur-md rounded-full mt-3 transform scale-x-95 group-hover:scale-x-105 transition-transform duration-300"></div>
+        </div>
+
+        <!-- Interactive Helper Hints Below Bag -->
+        <div class="mt-4 text-center space-y-1">
+          <p class="text-xs text-kuai-bright font-mono flex items-center justify-center gap-1.5">
+            <span class="animate-bounce">👆</span>
+            <span class="font-bold">滑鼠點擊包裝可 3D 翻轉正面與背面</span>
+            <span>✦</span>
+            <span>晃動滑鼠體驗 3D 傾斜反射</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Sentence Generator & Live Log Console -->
+      <div class="lg:col-span-3 flex flex-col gap-4 order-3">
+        
+        <!-- Sentence Making Customizer -->
+        <div class="glass-panel rounded-2xl p-5 border border-emerald-900/80 shadow-2xl space-y-3">
+          <div class="border-b border-emerald-900/50 pb-2">
+            <h2 class="text-xs font-mono uppercase tracking-widest text-kuai-bright flex items-center gap-1.5 font-bold">
+              <span>✍️ 填寫你的乖乖造句</span>
+            </h2>
+            <p class="text-[11px] text-emerald-400/70 mt-0.5">即時顯示在中間包裝的造句白板上</p>
+          </div>
+
+          <div class="space-y-2.5">
+            <div>
+              <label class="text-[11px] font-mono text-emerald-300 block mb-1">造句 第一句 (Line 1)</label>
+              <input id="input-line-1" type="text" value="讓伺服器綠燈常亮，" maxlength="20" class="w-full bg-black/60 border border-emerald-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-kuai-bright font-medium transition" placeholder="例如：讓伺服器綠燈常亮，">
+            </div>
+
+            <div>
+              <label class="text-[11px] font-mono text-emerald-300 block mb-1">造句 第二句 (Line 2)</label>
+              <input id="input-line-2" type="text" value="上線 0 故障，代碼 0 BUG！" maxlength="20" class="w-full bg-black/60 border border-emerald-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-kuai-bright font-medium transition" placeholder="例如：上線 0 故障，代碼 0 BUG！">
+            </div>
+
+            <!-- Quick Template Sentences -->
+            <div>
+              <label class="text-[10px] font-mono text-emerald-400/80 block mb-1">快速選用經典金句：</label>
+              <div class="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
+                <button class="template-btn py-1 px-1.5 rounded-lg border border-emerald-900 bg-black/40 text-emerald-300 hover:border-emerald-600 text-left truncate" data-l1="讓生產環境順利運行，" data-l2="全天候 0 報錯 0 警告！">
+                  🎯 生產環境順利
+                </button>
+                <button class="template-btn py-1 px-1.5 rounded-lg border border-emerald-900 bg-black/40 text-emerald-300 hover:border-emerald-600 text-left truncate" data-l1="讓專案進度天天超前，" data-l2="準時下班不加班！">
+                  ☕ 準時下班不加班
+                </button>
+                <button class="template-btn py-1 px-1.5 rounded-lg border border-emerald-900 bg-black/40 text-emerald-300 hover:border-emerald-600 text-left truncate" data-l1="讓資料庫查詢如飛，" data-l2="連線數充足不塞車！">
+                  ⚡ 資料庫極速
+                </button>
+                <button class="template-btn py-1 px-1.5 rounded-lg border border-emerald-900 bg-black/40 text-emerald-300 hover:border-emerald-600 text-left truncate" data-l1="讓論文實驗一次過，" data-l2="口試委員全給 A+！">
+                  🎓 論文順利畢業
+                </button>
+              </div>
+            </div>
+
+            <button id="btn-apply-sentence" class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-700 to-lime-600 hover:from-emerald-600 hover:to-lime-500 text-black font-bold text-xs active:scale-95 transition flex items-center justify-center gap-1.5 shadow">
+              <span>✏️ 銘刻造句至乖乖包裝</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live IT Blessing Log -->
+        <div class="glass-panel rounded-2xl p-5 border border-emerald-900/80 space-y-2.5">
+          <div class="flex items-center justify-between border-b border-emerald-900/50 pb-2">
+            <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-kuai-bright"></span>
+              神殿守護日誌 (Blessing Logs)
+            </span>
+            <span class="text-[9px] text-emerald-500 font-mono">LIVE</span>
+          </div>
+          
+          <div id="log-console" class="bg-black/60 rounded-xl p-3 h-40 overflow-y-auto font-mono text-[11px] space-y-1.5 border border-emerald-950 text-emerald-300">
+            <div class="text-kuai-bright">[SYSTEM] 乖乖造句包 3D 守護矩陣已啟動。</div>
+            <div class="text-emerald-400/80">[STATUS] 奶油椰子綠光號誌常亮：100% 綠燈。</div>
+            <div class="text-emerald-400/80">[BLESS] 椰香能量注入完成：伺服器平穩運作中。</div>
+            <div class="text-emerald-500/70">[TIP] 點擊包裝可進行 3D 卡片正反面翻轉！</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- The 3 Iron Rules of Kuai Kuai Culture (乖乖三大不可侵犯鐵律) -->
+    <section class="glass-panel rounded-3xl p-6 md:p-8 border border-emerald-900/80 relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-xs font-mono font-bold text-kuai-bright uppercase tracking-widest bg-emerald-950 px-3 py-1 rounded-full border border-emerald-800">
+          TAIWAN TECH FOLKLORE
+        </span>
+        <h2 class="text-2xl md:text-3xl font-black text-white mt-3 mb-2 tracking-wide">
+          台灣工程師必守 ✦ 綠色乖乖三大玄學鐵律
+        </h2>
+        <p class="text-sm text-emerald-300/80">
+          獲英國 BBC、CNN 與全球高科技機房公認的機台守護究極神器。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rule 1 -->
+        <div class="p-5 rounded-2xl bg-black/40 border border-emerald-900/60 glass-panel-hover transition duration-300 space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-lime-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-emerald-500/20">
+            01
+          </div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>必須是綠色（奶油椰子）</span>
+          </h3>
+          <p class="text-xs text-emerald-300/80 leading-relaxed">
+            綠色代表「綠燈正常（Status OK）」。絕對不能買黃色（五香/當機警示）或紅色（巧克力/重大故障），否則機房即刻亮起紅燈警報！
+          </p>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="p-5 rounded-2xl bg-black/40 border border-emerald-900/60 glass-panel-hover transition duration-300 space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-lime-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-emerald-500/20">
+            02
+          </div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>絕對不能拆開吃掉</span>
+          </h3>
+          <p class="text-xs text-emerald-300/80 leading-relaxed">
+            一旦打開或吃掉包裝內的玉米果，守護結界便會瞬間崩解，伺服器可能隨即噴出 500 Internal Server Error 或 Kernel Panic。
+          </p>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="p-5 rounded-2xl bg-black/40 border border-emerald-900/60 glass-panel-hover transition duration-300 space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-lime-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-emerald-500/20">
+            03
+          </div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>必須在有效期限內</span>
+          </h3>
+          <p class="text-xs text-emerald-300/80 leading-relaxed">
+            過期的乖乖法力會衰退！每年需定期更換為最新一批綠色乖乖（但本網頁數位造句包永不過期）。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Retro CRT Terminal Mode Modal / Section -->
+    <section id="ascii-section" class="hidden glass-panel rounded-3xl p-6 border-2 border-emerald-500/50 bg-black/90 font-mono relative overflow-hidden transition-all duration-300">
+      <div class="flex items-center justify-between border-b border-emerald-800 pb-3 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+          <span class="text-xs font-bold text-kuai-bright ml-2">KUAI_KUAI_ASCII_MATRIX.exe</span>
+        </div>
+        <button id="close-ascii-btn" class="text-xs text-emerald-400 hover:text-white px-2 py-1 rounded bg-emerald-950 border border-emerald-800">
+          ✕ 關閉終端
+        </button>
+      </div>
+
+      <div class="text-[10px] sm:text-xs text-kuai-bright overflow-x-auto whitespace-pre leading-none font-mono py-2 select-all bg-emerald-950/30 p-4 rounded-xl border border-emerald-900">
+                           `-+syhddmmmddhyo+:`
+                        .+hmmdddddddddddddddmmds/`      ``...`
+                     `/hmddddddddddddddddddddddddmy++osyhyyyhhs.
+                   `ommddddddddddddddddddddddddddddmmdys+++syhhh:
+       .`         /mmddddddddddddddddddddddddddddddddmmhyyyyyyyyh/
+   `:sdNy`      .ymddddddddddddddddddddddddddddddddddddmdhhhyyyyyh-
+ `.+hmmmddmo     -mmddddddddddddddddddddddddddddddddddddddmmhhhhhhhh+
+  odmmdddddddms` `+mmddddddddddddddddddddddddddddddddddddddddmmddhhhhh+
+  ymdmmmmmmmmdmmdmmdddddddddddddmmddddddddddddddddddddddddddddmd:ydhhd:
+  :Nmmmmmmmmmmmmmmddy+::+ydddms/:::/+osydmdddddddddddddddddddddN-`:+o:
+ ymmmmmmmmmmmmmmdo.`.``/hmm/+hdd/``````-+ydmdddddddddddddddddmy
+   .mmmmmmmmmmmmmmh:`-o+`:hm/`-o:```````os/./ymddddddddddddddddN`
+    /Nmmmmmmmmmmmmh:..::-od/``dMs````````/hNm:`-ymddddddddddddddN-
+ sNmmmmmmmmmmmd+-:/-.`..`.hh:`...``:hh..:```:NdmmmmmmmdmddddN/
+  `::/dmmmmmmmmmmmmdo:``./d/````-..:`-mdd.````.dmdmmmmmmmmmmmdmmy
+ .//::-..+dmmmmmmmmmmh/````-dNms-``..`.+/`````-dmds/:-:ohmmmmmmmmN.
+ -/.`--`/dmmmdysydmy.````omNd+.-::-...-:os:..`-hs-`.`./hmmmmmmmmd.       .os`
+ /:---.`.`-/sy:```omy-````hddo` `s.``/NNNNo...`````-+o/``/dmmmmmmmmmms:..:+ymmN:
+ :/.``.``````-``./dNh/````syyyhshd-``:mNmy.````````.```./hmmmmmmmmmmmmmmmmmmmmmd
+  .::-```...````+dNNNs-```//::/+ooosyhdds.``````-----:+ydmmmmmmmmmmmmmmmmmmmmmmN:
+    `:/````..``-shhdmms-``./::/:::::::+/``````.+dmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmd
+      ./:-```.-oyyhyhhhy+.`.:/::::///:.````..:ymNNmmo:/ymmmmmmmmmmmmmmmmmmmmmmmmN
+ `:y:./yyyyyyyyhh///:..--:--.````..-/ymNNNNNy.``-hNNNNNmmmmmmmmmmmmmmNmh+-
+        `ymdyhyyyyyyhhy/---o+///:::::://oyhmNNNNNNNo```:osyho/---:ymmNNNNmho:`
+      `+hhhhhyyyyhhs-----y--o/------:+hhhhhhhddds.````````..-..-+dNds+-`
+    `.:+oossyyyy:---:ssoy:------+hyyyyhhyyys-``....```..--..//`
+                   syysyysssho:-----ohyyyyhyhhyy/`````..``````-o.
+                   `hssssssoyhhyo+++syyhhhhyyhyyh+:::-..-:::::::.
+ :hysssyo/yhhssyysssssyhyhhhyhdmmy....`
+                   shyyyyyyhhhhyyyyyyyyyyhh/-+syhdo`
+ `hhhhhhhhhhhhhhhhhhhhhhhhy`
+ \-:yhyyyysyhhyyyyyyyyyyyyh-
+ -hysssssyydsyyssssssssyh.
+ /hsysyyyyd-.+yyyssyyssyh-
+ -/+oo++/-`   +hhyhhhso`  .ohyyyyyyhho:`   `-:/++++/:.
+ -+ooooooooooso+/ssss.yy:      `//+ds/oysss+ossoooooooo+os/.
+    `:o+:/oooooooooooooooossyh:          oyyssooooooooooooooo+/:os+`
+    -ssoooooooooooooooooosssssy+          .hyssssssooooooooooooooooss-
+   /syysssssssssssssssyyyyyyyh-           shyyyysyyysssssssssssssssyy
+     `-/+ossyyyysso+/:-./++//.             .---` `.-:/+oossssoo++/:-\
+      </div>
+      <div class="mt-3 text-xs text-emerald-400 font-mono flex items-center justify-between">
+        <span>// ASCII ART SOURCE RESTORED</span>
+        <button id="copy-ascii-btn" class="px-3 py-1 bg-emerald-900 hover:bg-emerald-800 text-kuai-bright rounded transition border border-emerald-700">
+          複製 ASCII 符咒
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fullscreen Holy Green Wave Overlay -->
+  <div id="holy-wave-overlay" class="fixed inset-0 pointer-events-none z-50 opacity-0 transition-opacity duration-700 flex items-center justify-center">
+    <div class="w-full h-full bg-emerald-500/30"></div>
+    <div class="absolute text-center">
+      <div class="text-4xl md:text-7xl font-black text-kuai-bright drop-shadow-[0_0_30px_#00ff88] animate-bounce">
+        ✦ 綠燈高照・萬事金順 ✦
+      </div>
+      <div class="text-lg md:text-2xl font-mono text-white mt-4 font-bold tracking-widest">
+        ALL TRAFFIC GREEN • 0 DOWNTIME
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Snack Corn Puff Container -->
+  <div id="puff-container" class="fixed inset-0 pointer-events-none z-40 overflow-hidden"></div>
+
+  <!-- Footer -->
+  <footer class="relative z-20 border-t border-emerald-950/80 py-8 px-6 text-center text-xs font-mono text-emerald-500/70 glass-panel mt-12">
+    <div class="max-w-4xl mx-auto space-y-2">
+      <p class="text-emerald-300 font-bold">
+        綠色乖乖 (Kuai Kuai Green Guardian) ✦ 奶油椰子造句包
+      </p>
+      <p class="text-emerald-500/60 text-[11px]">
+        經典綠色奶油椰子風味 • 科技信仰認證 • 祝您的 Code 零警告零報錯，機台一路綠燈暢行！
+      </p>
+      <div class="pt-2 text-[10px] text-emerald-600">
+        © 2026 KUAI KUAI IT BLESSING MATRIX • ALL GREEN ALWAYS
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic & Sound Synth -->
+  <script>
+    // --- 1. Synthesizer & Web Audio Engine ---
+    let audioCtx = null;
+    let soundEnabled = false;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Play crisp card flip swoosh SFX
+    function playFlipSound() {
+      if (!soundEnabled || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(280, now);
+      osc.frequency.exponentialRampToValueAtTime(680, now + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.25);
+      
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start(now);
+      osc.stop(now + 0.25);
+    }
+
+    // Play crisp crunch sound
+    function playCrunchSound() {
+      if (!soundEnabled || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      
+      const bufferSize = audioCtx.sampleRate * 0.08;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+      }
+
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1500, now);
+      filter.Q.setValueAtTime(3, now);
+
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.35, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      noise.start(now);
+
+      playChime(620 + Math.random() * 150, 0.15);
+    }
+
+    // Play chime sound
+    function playChime(freq = 659.25, duration = 0.5) {
+      if (!soundEnabled || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.4, now + duration);
+
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + duration);
+    }
+
+    // Play holy wave chord
+    function playHolyWaveSound() {
+      if (!soundEnabled || !audioCtx) return;
+      [523.25, 659.25, 783.99, 987.77, 1046.50].forEach((freq, idx) => {
+        setTimeout(() => {
+          if (!audioCtx) return;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          
+          gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+          
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 1.2);
+        }, idx * 80);
+      });
+    }
+
+    // Audio button listener
+    const audioBtn = document.getElementById('audio-btn');
+    const audioIconOn = document.getElementById('audio-icon-on');
+    const audioIconOff = document.getElementById('audio-icon-off');
+    const audioText = document.getElementById('audio-text');
+
+    audioBtn.addEventListener('click', () => {
+      initAudio();
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        audioIconOn.classList.remove('hidden');
+        audioIconOff.classList.add('hidden');
+        audioText.textContent = '音效: 開';
+        audioText.classList.add('text-kuai-bright');
+        playChime(880, 0.4);
+        addLog('[AUDIO] 音效已開啟。');
+      } else {
+        audioIconOn.classList.add('hidden');
+        audioIconOff.classList.remove('hidden');
+        audioText.textContent = '音效: 關';
+        audioText.classList.remove('text-kuai-bright');
+        addLog('[AUDIO] 音效已靜音。');
+      }
+    });
+
+    // --- 2. Interactive 3D Card Flip & Parallax Logic ---
+    const bagFlipper = document.getElementById('bag-flipper');
+    const bagTilt = document.getElementById('bag-tilt');
+    const bagContainer = document.getElementById('bag-container');
+    const foilFront = document.getElementById('foil-front');
+    const foilBack = document.getElementById('foil-back');
+    const flipBtnText = document.getElementById('flip-btn-text');
+    let isFlipped = false;
+
+    function toggleCardFlip() {
+      initAudio();
+      isFlipped = !isFlipped;
+      playFlipSound();
+
+      if (isFlipped) {
+        bagFlipper.classList.add('is-flipped');
+        bagFlipper.style.transform = 'rotateY(180deg)';
+        flipBtnText.textContent = '翻回正面 (造句包)';
+        addLog('[FLIP] 翻轉至背面：檢視機房守護營養規格表。');
+      } else {
+        bagFlipper.classList.remove('is-flipped');
+        bagFlipper.style.transform = 'rotateY(0deg)';
+        flipBtnText.textContent = '翻轉包裝 (正面/背面)';
+        addLog('[FLIP] 翻轉至正面：檢視奶油椰子造句包。');
+      }
+
+      // Add to worship stats
+      incrementWorship();
+    }
+
+    // Clicking directly on the bag triggers the 3D flip
+    bagContainer.addEventListener('click', (e) => {
+      // If user clicked input or button inside, don't trigger flip
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+      toggleCardFlip();
+      createClickSpark(e.clientX, e.clientY);
+    });
+
+    document.getElementById('btn-flip-card').addEventListener('click', toggleCardFlip);
+    document.getElementById('btn-quick-flip').addEventListener('click', toggleCardFlip);
+
+    // 3D Parallax Tilt Effect on Mouse Move (applied to bagTilt so it never conflicts with 180deg flip)
+    bagContainer.addEventListener('mousemove', (e) => {
+      const rect = bagContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -12;
+      const rotateY = ((x - centerX) / centerX) * 14;
+      
+      bagTilt.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      
+      // Dynamic lighting sheen
+      const sheenX = (x / rect.width) * 100;
+      const sheenY = (y / rect.height) * 100;
+      const grad = `radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.15) 100%)`;
+      foilFront.style.background = grad;
+      foilBack.style.background = grad;
+    });
+
+    bagContainer.addEventListener('mouseleave', () => {
+      bagTilt.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      foilFront.style.background = '';
+      foilBack.style.background = '';
+    });
+
+    // --- 3. Telemetry & Stats Counters ---
+    let worshipCount = 888;
+    let bugsCleared = 2048;
+    const worshipCountEl = document.getElementById('worship-count');
+    const bugsClearedEl = document.getElementById('bugs-cleared');
+
+    function incrementWorship() {
+      worshipCount += 1;
+      bugsCleared += Math.floor(Math.random() * 4) + 1;
+      worshipCountEl.textContent = worshipCount.toLocaleString();
+      bugsClearedEl.textContent = bugsCleared.toLocaleString();
+    }
+
+    function createClickSpark(x, y) {
+      if (!x || !y) return;
+      const spark = document.createElement('div');
+      spark.className = 'fixed font-mono font-black text-sm text-kuai-bright pointer-events-none z-50 transition-all duration-700 select-none';
+      spark.style.left = `${x - 20}px`;
+      spark.style.top = `${y - 20}px`;
+      
+      const words = ['+1 綠燈', '3D 翻面', '0 BUG', '200 OK', '奶油椰香', '金順無比'];
+      spark.textContent = words[Math.floor(Math.random() * words.length)];
+      
+      document.body.appendChild(spark);
+
+      requestAnimationFrame(() => {
+        spark.style.transform = `translateY(-60px) scale(1.3)`;
+        spark.style.opacity = '0';
+      });
+
+      setTimeout(() => spark.remove(), 750);
+    }
+
+    // Worship Pray Button
+    document.getElementById('btn-pray').addEventListener('click', () => {
+      initAudio();
+      incrementWorship();
+      playCrunchSound();
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#00ff88', '#10b981', '#34d399', '#fbbf24', '#ffffff']
+      });
+      addLog('🙏 [BLESS] 虔誠摸摸乖乖，伺服器綠光普照，代碼暢行無阻！');
+    });
+
+    // Holy Wave Button
+    const holyWaveOverlay = document.getElementById('holy-wave-overlay');
+    document.getElementById('btn-holy-wave').addEventListener('click', () => {
+      initAudio();
+      playHolyWaveSound();
+      
+      holyWaveOverlay.classList.remove('opacity-0');
+      holyWaveOverlay.classList.add('opacity-100');
+      
+      confetti({
+        particleCount: 120,
+        spread: 120,
+        origin: { y: 0.5 },
+        colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
+      });
+
+      addLog('⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！');
+
+      setTimeout(() => {
+        holyWaveOverlay.classList.remove('opacity-100');
+        holyWaveOverlay.classList.add('opacity-0');
+      }, 1600);
+    });
+
+    // Snack Corn Puff Spawn
+    const puffContainer = document.getElementById('puff-container');
+    document.getElementById('btn-spawn-puff').addEventListener('click', () => {
+      initAudio();
+      playCrunchSound();
+      for (let i = 0; i < 8; i++) spawnSinglePuff();
+      addLog('✨ [SNACK] 召喚香濃酥脆椰子米果！能量滿點！');
+    });
+
+    function spawnSinglePuff() {
+      const puff = document.createElement('div');
+      const size = Math.floor(Math.random() * 20) + 24;
+      const startX = Math.random() * window.innerWidth;
+      
+      puff.className = 'absolute pointer-events-none drop-shadow-md select-none transition-transform duration-1000';
+      puff.style.left = `${startX}px`;
+      puff.style.top = `-50px`;
+      puff.style.width = `${size}px`;
+      puff.style.height = `${size}px`;
+      
+      puff.innerHTML = `
+        <svg viewBox="0 0 40 40" class="w-full h-full">
+          <path d="M 10 5 C 28 -5, 38 15, 30 32 C 20 42, -2 30, 10 5 Z" fill="#facc15" stroke="#a16207" stroke-width="2" />
+          <circle cx="16" cy="14" r="2.5" fill="#ffffff" opacity="0.8" />
+        </svg>
+      `;
+
+      puffContainer.appendChild(puff);
+
+      const targetY = window.innerHeight + 100;
+      const driftX = (Math.random() - 0.5) * 200;
+      const rot = (Math.random() - 0.5) * 720;
+      const fallDuration = Math.random() * 2500 + 2000;
+
+      puff.animate([
+        { transform: 'translateY(0px) translateX(0px) rotate(0deg)', opacity: 1 },
+        { transform: `translateY(${targetY}px) translateX(${driftX}px) rotate(${rot}deg)`, opacity: 0.2 }
+      ], {
+        duration: fallDuration,
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      }).onfinish = () => puff.remove();
+    }
+
+    // --- 4. Interactive Sentence Making Logic ---
+    const inputLine1 = document.getElementById('input-line-1');
+    const inputLine2 = document.getElementById('input-line-2');
+    const boardLine1 = document.getElementById('board-line-1');
+    const boardLine2 = document.getElementById('board-line-2');
+    const btnApplySentence = document.getElementById('btn-apply-sentence');
+    const templateButtons = document.querySelectorAll('.template-btn');
+
+    function updateSentence() {
+      const l1 = inputLine1.value.trim() || '讓伺服器綠燈常亮，';
+      const l2 = inputLine2.value.trim() || '上線 0 故障，代碼 0 BUG！';
+      
+      boardLine1.textContent = l1;
+      boardLine2.textContent = l2;
+
+      const card = document.getElementById('sentence-card-board');
+      card.classList.add('scale-105', 'bg-yellow-50');
+      setTimeout(() => card.classList.remove('scale-105', 'bg-yellow-50'), 250);
+    }
+
+    // Real-time input binding
+    inputLine1.addEventListener('input', updateSentence);
+    inputLine2.addEventListener('input', updateSentence);
+
+    btnApplySentence.addEventListener('click', () => {
+      updateSentence();
+      initAudio();
+      playChime(784, 0.3);
+      addLog(`[SENTENCE] 造句已成功銘刻：【${inputLine1.value} ${inputLine2.value}】`);
+    });
+
+    templateButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const l1 = btn.getAttribute('data-l1');
+        const l2 = btn.getAttribute('data-l2');
+        inputLine1.value = l1;
+        inputLine2.value = l2;
+        updateSentence();
+        initAudio();
+        playChime(659.25, 0.2);
+        addLog(`[TEMPLATE] 套用金句：【${l1} ${l2}】`);
+      });
+    });
+
+    // --- 5. Terminal / ASCII Art Section ---
+    const asciiToggleBtn = document.getElementById('ascii-toggle-btn');
+    const asciiSection = document.getElementById('ascii-section');
+    const closeAsciiBtn = document.getElementById('close-ascii-btn');
+    const copyAsciiBtn = document.getElementById('copy-ascii-btn');
+
+    asciiToggleBtn.addEventListener('click', () => {
+      asciiSection.classList.toggle('hidden');
+      if (!asciiSection.classList.contains('hidden')) {
+        asciiSection.scrollIntoView({ behavior: 'smooth' });
+        addLog('[TERMINAL] 已切換至 ASCII 復古終端視窗。');
+      }
+    });
+
+    closeAsciiBtn.addEventListener('click', () => asciiSection.classList.add('hidden'));
+
+    copyAsciiBtn.addEventListener('click', () => {
+      const asciiText = asciiSection.querySelector('.whitespace-pre').textContent;
+      navigator.clipboard.writeText(asciiText).then(() => {
+        copyAsciiBtn.textContent = '已成功複製！';
+        setTimeout(() => copyAsciiBtn.textContent = '複製 ASCII 符咒', 2000);
+        addLog('[CLIPBOARD] 乖乖 ASCII 符咒已複製到剪貼簿。');
+      });
+    });
+
+    // --- 6. Helper: Real-time Log Appender ---
+    const logConsole = document.getElementById('log-console');
+    function addLog(msg) {
+      const line = document.createElement('div');
+      const time = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+      line.innerHTML = `<span class="text-emerald-600 font-mono">[${time}]</span> ${msg}`;
+      logConsole.appendChild(line);
+      logConsole.scrollTop = logConsole.scrollHeight;
+    }
+
+    // --- 7. Interactive Background Canvas (Matrix Green Halos & Hexagonal Grid) ---
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const glyphs = ['200 OK', '0 ERR', 'KUAI', '乖', '✦', 'STATUS_GREEN', '0ms', 'UPTIME:100%', 'RUNNING', '造句包', '綠燈常亮'];
+
+    for (let i = 0; i < 45; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: -Math.random() * 0.6 - 0.2,
+        text: glyphs[Math.floor(Math.random() * glyphs.length)],
+        size: Math.random() * 9 + 10,
+        opacity: Math.random() * 0.35 + 0.1,
+      });
+    }
+
+    function renderCanvas() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Subtle cyber grid
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.035)';
+      ctx.lineWidth = 1;
+      const gridSize = 48;
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Draw floating lucky IT runes
+      ctx.font = '11px "JetBrains Mono", monospace';
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.y < -30) {
+          p.y = height + 20;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -30) p.x = width + 20;
+        if (p.x > width + 30) p.x = -20;
+
+        ctx.fillStyle = `rgba(0, 255, 136, ${p.opacity})`;
+        ctx.fillText(p.text, p.x, p.y);
+      });
+
+      requestAnimationFrame(renderCanvas);
+    }
+
+    renderCanvas();
+  </script>
+</body>
+</html>
