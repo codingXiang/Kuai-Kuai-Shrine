@@ -205,4 +205,26 @@ describe('Hourly Green Light Barrier (整點綠光結界)', () => {
     vi.advanceTimersByTime(700);
     expect(overlay.classList.contains('opacity-100')).toBe(false);
   });
+
+  it('exposes a narrow page-facing Green Light Barrier Ritual interface', () => {
+    const initialTime = new Date('2026-08-27T14:15:00');
+    const { window } = loadShrineDom(initialTime);
+
+    expect(window.GreenLightBarrierRitual).toEqual({
+      triggerManual: expect.any(Function),
+      startHourly: expect.any(Function),
+      cleanup: expect.any(Function),
+    });
+  });
+
+  it('cleans up the hourly ritual timer through the ritual interface', () => {
+    const initialTime = new Date('2026-08-27T13:59:58');
+    const { window } = loadShrineDom(initialTime);
+
+    window.GreenLightBarrierRitual.cleanup();
+    vi.advanceTimersByTime(3000);
+
+    const logConsole = document.getElementById('log-console')!;
+    expect(logConsole.textContent).not.toContain('整點綠光結界');
+  });
 });
