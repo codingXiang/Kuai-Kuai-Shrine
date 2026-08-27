@@ -1277,54 +1277,58 @@
     const holyWaveSubtitle = document.getElementById('holy-wave-subtitle');
     let overlayDismissTimer = null;
 
-    function triggerGreenLightBarrier({
-      title = '✦ 綠燈高照・萬事金順 ✦',
-      subtitle = 'ALL TRAFFIC GREEN • 0 DOWNTIME',
-      logMessage = '⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！',
-      duration = 1600,
-      confettiOptions = {
-        particleCount: 120,
-        spread: 120,
-        origin: { y: 0.5 },
-        colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
-      }
-    } = {}) {
-      try {
-        initAudio();
-        playHolyWaveSound();
-      } catch (e) {
-        // Audio failures or browser autoplay restrictions must not block the visual ritual
-      }
-
-      if (holyWaveTitle) holyWaveTitle.textContent = title;
-      if (holyWaveSubtitle) holyWaveSubtitle.textContent = subtitle;
-
-      holyWaveOverlay.classList.remove('opacity-0');
-      holyWaveOverlay.classList.add('opacity-100');
-
-      if (typeof confetti === 'function') {
+    const greenLightBarrierRitual = {
+      trigger({
+        title = '✦ 綠燈高照・萬事金順 ✦',
+        subtitle = 'ALL TRAFFIC GREEN • 0 DOWNTIME',
+        logMessage = '⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！',
+        duration = 1600,
+        confettiOptions = {
+          particleCount: 120,
+          spread: 120,
+          origin: { y: 0.5 },
+          colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
+        }
+      } = {}) {
         try {
-          confetti(confettiOptions);
-        } catch (e) {}
-      }
+          initAudio();
+          playHolyWaveSound();
+        } catch (e) {
+          // Audio failures or browser autoplay restrictions must not block the visual ritual
+        }
 
-      if (logMessage) {
-        addLog(logMessage);
-      }
+        if (holyWaveTitle) holyWaveTitle.textContent = title;
+        if (holyWaveSubtitle) holyWaveSubtitle.textContent = subtitle;
 
-      if (overlayDismissTimer) {
-        clearTimeout(overlayDismissTimer);
-      }
+        holyWaveOverlay.classList.remove('opacity-0');
+        holyWaveOverlay.classList.add('opacity-100');
 
-      overlayDismissTimer = setTimeout(() => {
-        holyWaveOverlay.classList.remove('opacity-100');
-        holyWaveOverlay.classList.add('opacity-0');
-      }, duration);
-    }
+        if (typeof confetti === 'function') {
+          try {
+            confetti(confettiOptions);
+          } catch (e) {}
+        }
+
+        if (logMessage) {
+          addLog(logMessage);
+        }
+
+        if (overlayDismissTimer) {
+          clearTimeout(overlayDismissTimer);
+        }
+
+        overlayDismissTimer = setTimeout(() => {
+          holyWaveOverlay.classList.remove('opacity-100');
+          holyWaveOverlay.classList.add('opacity-0');
+        }, duration);
+      }
+    };
+
+    window.greenLightBarrierRitual = greenLightBarrierRitual;
 
     // Holy Wave Button
     document.getElementById('btn-holy-wave').addEventListener('click', () => {
-      triggerGreenLightBarrier();
+      greenLightBarrierRitual.trigger();
     });
 
     // --- Hourly Green Light Barrier Scheduler ---
@@ -1341,7 +1345,7 @@
 
       if (currentHourKey !== lastCelebratedHourKey) {
         lastCelebratedHourKey = currentHourKey;
-        triggerGreenLightBarrier({
+        greenLightBarrierRitual.trigger({
           title: '✦ 整點結界・順利度過 ✦',
           subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
           logMessage: '⚡ [HOURLY BARRIER] 整點綠光結界啟動！恭喜順利度過上一個小時，伺服器持續零當機！',

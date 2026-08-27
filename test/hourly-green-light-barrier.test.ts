@@ -59,19 +59,28 @@ describe('Hourly Green Light Barrier (整點綠光結界)', () => {
     }
   });
 
-  it('triggers hourly green light barrier when crossing HH:00:00 boundary while page is open', () => {
+  it('triggers hourly green light barrier through the ritual interface when crossing HH:00:00 boundary while page is open', () => {
     // 13:59:50 - 10 seconds before 14:00:00
     const initialTime = new Date('2026-08-27T13:59:50');
-    loadShrineDom(initialTime);
+    const { window } = loadShrineDom(initialTime);
 
     const overlay = document.getElementById('holy-wave-overlay')!;
     const logConsole = document.getElementById('log-console')!;
+    const triggerSpy = vi.spyOn(window.greenLightBarrierRitual, 'trigger');
 
     // Initially overlay should not be active
     expect(overlay.classList.contains('opacity-100')).toBe(false);
 
     // Advance past the hour mark (14:00:01)
     vi.advanceTimersByTime(12000);
+
+    expect(triggerSpy).toHaveBeenCalledTimes(1);
+    expect(triggerSpy).toHaveBeenCalledWith(expect.objectContaining({
+      title: '✦ 整點結界・順利度過 ✦',
+      subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
+      logMessage: expect.stringContaining('[HOURLY BARRIER]'),
+      duration: 3000,
+    }));
 
     // Overlay should now be displayed
     expect(overlay.classList.contains('opacity-100')).toBe(true);
