@@ -990,10 +990,10 @@
   <div id="holy-wave-overlay" class="fixed inset-0 pointer-events-none z-50 opacity-0 transition-opacity duration-700 flex items-center justify-center">
     <div class="w-full h-full bg-emerald-500/30"></div>
     <div class="absolute text-center">
-      <div class="text-4xl md:text-7xl font-black text-kuai-bright drop-shadow-[0_0_30px_#00ff88] animate-bounce">
+      <div id="holy-wave-title" class="text-4xl md:text-7xl font-black text-kuai-bright drop-shadow-[0_0_30px_#00ff88] animate-bounce">
         ✦ 綠燈高照・萬事金順 ✦
       </div>
-      <div class="text-lg md:text-2xl font-mono text-white mt-4 font-bold tracking-widest">
+      <div id="holy-wave-subtitle" class="text-lg md:text-2xl font-mono text-white mt-4 font-bold tracking-widest">
         ALL TRAFFIC GREEN • 0 DOWNTIME
       </div>
     </div>
@@ -1271,29 +1271,93 @@
       addLog('🙏 [BLESS] 虔誠摸摸乖乖，伺服器綠光普照，代碼暢行無阻！');
     });
 
-    // Holy Wave Button
+    // --- Green Light Barrier Ritual Engine (Manual & Hourly) ---
     const holyWaveOverlay = document.getElementById('holy-wave-overlay');
-    document.getElementById('btn-holy-wave').addEventListener('click', () => {
-      initAudio();
-      playHolyWaveSound();
-      
-      holyWaveOverlay.classList.remove('opacity-0');
-      holyWaveOverlay.classList.add('opacity-100');
-      
-      confetti({
+    const holyWaveTitle = document.getElementById('holy-wave-title');
+    const holyWaveSubtitle = document.getElementById('holy-wave-subtitle');
+    let overlayDismissTimer = null;
+
+    function triggerGreenLightBarrier({
+      title = '✦ 綠燈高照・萬事金順 ✦',
+      subtitle = 'ALL TRAFFIC GREEN • 0 DOWNTIME',
+      logMessage = '⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！',
+      duration = 1600,
+      confettiOptions = {
         particleCount: 120,
         spread: 120,
         origin: { y: 0.5 },
         colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
-      });
+      }
+    } = {}) {
+      try {
+        initAudio();
+        playHolyWaveSound();
+      } catch (e) {
+        // Audio failures or browser autoplay restrictions must not block the visual ritual
+      }
 
-      addLog('⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！');
+      if (holyWaveTitle) holyWaveTitle.textContent = title;
+      if (holyWaveSubtitle) holyWaveSubtitle.textContent = subtitle;
 
-      setTimeout(() => {
+      holyWaveOverlay.classList.remove('opacity-0');
+      holyWaveOverlay.classList.add('opacity-100');
+
+      if (typeof confetti === 'function') {
+        try {
+          confetti(confettiOptions);
+        } catch (e) {}
+      }
+
+      if (logMessage) {
+        addLog(logMessage);
+      }
+
+      if (overlayDismissTimer) {
+        clearTimeout(overlayDismissTimer);
+      }
+
+      overlayDismissTimer = setTimeout(() => {
         holyWaveOverlay.classList.remove('opacity-100');
         holyWaveOverlay.classList.add('opacity-0');
-      }, 1600);
+      }, duration);
+    }
+
+    // Holy Wave Button
+    document.getElementById('btn-holy-wave').addEventListener('click', () => {
+      triggerGreenLightBarrier();
     });
+
+    // --- Hourly Green Light Barrier Scheduler ---
+    function getHourKey(date) {
+      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}`;
+    }
+
+    // Record initial hour key at page open so initial load never retroactively triggers
+    let lastCelebratedHourKey = getHourKey(new Date());
+
+    function checkHourlyRitual() {
+      const now = new Date();
+      const currentHourKey = getHourKey(now);
+
+      if (currentHourKey !== lastCelebratedHourKey) {
+        lastCelebratedHourKey = currentHourKey;
+        triggerGreenLightBarrier({
+          title: '✦ 整點結界・順利度過 ✦',
+          subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
+          logMessage: '⚡ [HOURLY BARRIER] 整點綠光結界啟動！恭喜順利度過上一個小時，伺服器持續零當機！',
+          duration: 3000,
+          confettiOptions: {
+            particleCount: 150,
+            spread: 140,
+            origin: { y: 0.5 },
+            colors: ['#00ff88', '#10b981', '#fbbf24', '#ffffff']
+          }
+        });
+      }
+    }
+
+    // Check clock periodically to handle hour crossing while page is open
+    setInterval(checkHourlyRitual, 1000);
 
     // Snack Corn Puff Spawn
     const puffContainer = document.getElementById('puff-container');
