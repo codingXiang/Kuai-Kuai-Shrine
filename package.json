@@ -1,0 +1,23 @@
+{
+  "name": "hourly-green-light-barrier",
+  "version": "1.0.0",
+  "description": "> 台灣工程師信仰之光 • 機房穩定守護神器 • 綠燈常亮 • 0 BUG • 萬事金順",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^26.4.0",
+    "jsdom": "^30.0.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
