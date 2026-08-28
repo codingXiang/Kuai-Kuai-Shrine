@@ -62,25 +62,16 @@ describe('Hourly Green Light Barrier (整點綠光結界)', () => {
   it('triggers hourly green light barrier through the ritual interface when crossing HH:00:00 boundary while page is open', () => {
     // 13:59:50 - 10 seconds before 14:00:00
     const initialTime = new Date('2026-08-27T13:59:50');
-    const { window } = loadShrineDom(initialTime);
+    loadShrineDom(initialTime);
 
     const overlay = document.getElementById('holy-wave-overlay')!;
     const logConsole = document.getElementById('log-console')!;
-    const triggerSpy = vi.spyOn(window.greenLightBarrierRitual, 'trigger');
 
     // Initially overlay should not be active
     expect(overlay.classList.contains('opacity-100')).toBe(false);
 
     // Advance past the hour mark (14:00:01)
     vi.advanceTimersByTime(12000);
-
-    expect(triggerSpy).toHaveBeenCalledTimes(1);
-    expect(triggerSpy).toHaveBeenCalledWith(expect.objectContaining({
-      title: '✦ 整點結界・順利度過 ✦',
-      subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
-      logMessage: expect.stringContaining('[HOURLY BARRIER]'),
-      duration: 3000,
-    }));
 
     // Overlay should now be displayed
     expect(overlay.classList.contains('opacity-100')).toBe(true);
@@ -188,30 +179,66 @@ describe('Hourly Green Light Barrier (整點綠光結界)', () => {
     expect(window.confetti).toHaveBeenCalled();
   });
 
-  it('preserves the manual holy wave button behavior with manual copy and duration', () => {
+  it('routes the manual holy wave button through the ritual interface with manual copy, effects, and duration', () => {
     const initialTime = new Date('2026-08-27T14:15:00');
-    loadShrineDom(initialTime);
+    const { window } = loadShrineDom(initialTime);
+
+    const audioContext = vi.fn().mockImplementation(() => ({
+      state: 'running',
+      currentTime: 0,
+      resume: vi.fn(),
+      createOscillator: vi.fn(),
+      createGain: vi.fn(),
+    }));
+    window.AudioContext = audioContext;
 
     const btnHolyWave = document.getElementById('btn-holy-wave')!;
     const overlay = document.getElementById('holy-wave-overlay')!;
     const logConsole = document.getElementById('log-console')!;
 
     expect(overlay.classList.contains('opacity-100')).toBe(false);
+    expect(window.confetti).not.toHaveBeenCalled();
 
-    // Click the manual button
     btnHolyWave.click();
 
+    expect(audioContext).toHaveBeenCalledOnce();
     expect(overlay.classList.contains('opacity-100')).toBe(true);
     expect(overlay.textContent).toContain('綠燈高照・萬事金順');
     expect(overlay.textContent).toContain('ALL TRAFFIC GREEN • 0 DOWNTIME');
     expect(logConsole.textContent).toContain('[HOLY WAVE] 全螢幕神聖綠燈結界釋放');
+    expect(window.confetti).toHaveBeenCalledWith({
+      particleCount: 120,
+      spread: 120,
+      origin: { y: 0.5 },
+      colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
+    });
 
-    // After 1000ms, still visible
     vi.advanceTimersByTime(1000);
     expect(overlay.classList.contains('opacity-100')).toBe(true);
 
-    // After 1600ms (+700ms), dismissed
     vi.advanceTimersByTime(700);
     expect(overlay.classList.contains('opacity-100')).toBe(false);
+  });
+
+  it('exposes a narrow page-facing Green Light Barrier Ritual interface', () => {
+    const initialTime = new Date('2026-08-27T14:15:00');
+    const { window } = loadShrineDom(initialTime);
+
+    expect(window.GreenLightBarrierRitual).toEqual({
+      triggerManual: expect.any(Function),
+      startHourly: expect.any(Function),
+      cleanup: expect.any(Function),
+    });
+  });
+
+  it('cleans up the hourly ritual timer through the ritual interface', () => {
+    const initialTime = new Date('2026-08-27T13:59:58');
+    const { window } = loadShrineDom(initialTime);
+
+    window.GreenLightBarrierRitual.cleanup();
+    vi.advanceTimersByTime(3000);
+
+    const logConsole = document.getElementById('log-console')!;
+    expect(logConsole.textContent).not.toContain('整點綠光結界');
   });
 });

@@ -1271,46 +1271,63 @@
       addLog('🙏 [BLESS] 虔誠摸摸乖乖，伺服器綠光普照，代碼暢行無阻！');
     });
 
-    // --- Green Light Barrier Ritual Engine (Manual & Hourly) ---
-    const holyWaveOverlay = document.getElementById('holy-wave-overlay');
-    const holyWaveTitle = document.getElementById('holy-wave-title');
-    const holyWaveSubtitle = document.getElementById('holy-wave-subtitle');
-    let overlayDismissTimer = null;
-
-    const greenLightBarrierRitual = {
-      trigger({
-        title = '✦ 綠燈高照・萬事金順 ✦',
-        subtitle = 'ALL TRAFFIC GREEN • 0 DOWNTIME',
-        logMessage = '⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！',
-        duration = 1600,
-        confettiOptions = {
+    // --- Green Light Barrier Ritual Module (Manual & Hourly) ---
+    const createGreenLightBarrierRitual = ({ overlay, titleEl, subtitleEl, addLog, initAudio, playSound, confetti }) => {
+      const manualRitual = {
+        title: '✦ 綠燈高照・萬事金順 ✦',
+        subtitle: 'ALL TRAFFIC GREEN • 0 DOWNTIME',
+        logMessage: '⚡ [HOLY WAVE] 全螢幕神聖綠燈結界釋放！所有潛在 Bug 瞬間退散！',
+        duration: 1600,
+        confettiOptions: {
           particleCount: 120,
           spread: 120,
           origin: { y: 0.5 },
           colors: ['#00ff88', '#10b981', '#fef08a', '#ffffff']
         }
-      } = {}) {
+      };
+      const hourlyRitual = {
+        title: '✦ 整點結界・順利度過 ✦',
+        subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
+        logMessage: '⚡ [HOURLY BARRIER] 整點綠光結界啟動！恭喜順利度過上一個小時，伺服器持續零當機！',
+        duration: 3000,
+        confettiOptions: {
+          particleCount: 150,
+          spread: 140,
+          origin: { y: 0.5 },
+          colors: ['#00ff88', '#10b981', '#fbbf24', '#ffffff']
+        }
+      };
+      let overlayDismissTimer = null;
+      let hourlyTimer = null;
+
+      function getHourKey(date) {
+        return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}`;
+      }
+
+      let lastCelebratedHourKey = getHourKey(new Date());
+
+      function triggerRitual(ritual) {
         try {
           initAudio();
-          playHolyWaveSound();
+          playSound();
         } catch (e) {
           // Audio failures or browser autoplay restrictions must not block the visual ritual
         }
 
-        if (holyWaveTitle) holyWaveTitle.textContent = title;
-        if (holyWaveSubtitle) holyWaveSubtitle.textContent = subtitle;
+        if (titleEl) titleEl.textContent = ritual.title;
+        if (subtitleEl) subtitleEl.textContent = ritual.subtitle;
 
-        holyWaveOverlay.classList.remove('opacity-0');
-        holyWaveOverlay.classList.add('opacity-100');
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
 
         if (typeof confetti === 'function') {
           try {
-            confetti(confettiOptions);
+            confetti(ritual.confettiOptions);
           } catch (e) {}
         }
 
-        if (logMessage) {
-          addLog(logMessage);
+        if (ritual.logMessage) {
+          addLog(ritual.logMessage);
         }
 
         if (overlayDismissTimer) {
@@ -1318,50 +1335,55 @@
         }
 
         overlayDismissTimer = setTimeout(() => {
-          holyWaveOverlay.classList.remove('opacity-100');
-          holyWaveOverlay.classList.add('opacity-0');
-        }, duration);
+          overlay.classList.remove('opacity-100');
+          overlay.classList.add('opacity-0');
+        }, ritual.duration);
       }
+
+      function checkHourlyRitual() {
+        const now = new Date();
+        const currentHourKey = getHourKey(now);
+
+        if (currentHourKey !== lastCelebratedHourKey) {
+          lastCelebratedHourKey = currentHourKey;
+          triggerRitual(hourlyRitual);
+        }
+      }
+
+      return {
+        triggerManual() {
+          triggerRitual(manualRitual);
+        },
+        startHourly() {
+          if (hourlyTimer) return;
+          hourlyTimer = setInterval(checkHourlyRitual, 1000);
+        },
+        cleanup() {
+          if (hourlyTimer) {
+            clearInterval(hourlyTimer);
+            hourlyTimer = null;
+          }
+          if (overlayDismissTimer) {
+            clearTimeout(overlayDismissTimer);
+            overlayDismissTimer = null;
+          }
+        }
+      };
     };
 
-    window.greenLightBarrierRitual = greenLightBarrierRitual;
-
-    // Holy Wave Button
-    document.getElementById('btn-holy-wave').addEventListener('click', () => {
-      greenLightBarrierRitual.trigger();
+    const GreenLightBarrierRitual = createGreenLightBarrierRitual({
+      overlay: document.getElementById('holy-wave-overlay'),
+      titleEl: document.getElementById('holy-wave-title'),
+      subtitleEl: document.getElementById('holy-wave-subtitle'),
+      addLog,
+      initAudio,
+      playSound: playHolyWaveSound,
+      confetti: window.confetti
     });
+    window.GreenLightBarrierRitual = GreenLightBarrierRitual;
 
-    // --- Hourly Green Light Barrier Scheduler ---
-    function getHourKey(date) {
-      return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}`;
-    }
-
-    // Record initial hour key at page open so initial load never retroactively triggers
-    let lastCelebratedHourKey = getHourKey(new Date());
-
-    function checkHourlyRitual() {
-      const now = new Date();
-      const currentHourKey = getHourKey(now);
-
-      if (currentHourKey !== lastCelebratedHourKey) {
-        lastCelebratedHourKey = currentHourKey;
-        greenLightBarrierRitual.trigger({
-          title: '✦ 整點結界・順利度過 ✦',
-          subtitle: 'HOURLY GREEN BARRIER • 0 DOWNTIME COMPLETED',
-          logMessage: '⚡ [HOURLY BARRIER] 整點綠光結界啟動！恭喜順利度過上一個小時，伺服器持續零當機！',
-          duration: 3000,
-          confettiOptions: {
-            particleCount: 150,
-            spread: 140,
-            origin: { y: 0.5 },
-            colors: ['#00ff88', '#10b981', '#fbbf24', '#ffffff']
-          }
-        });
-      }
-    }
-
-    // Check clock periodically to handle hour crossing while page is open
-    setInterval(checkHourlyRitual, 1000);
+    document.getElementById('btn-holy-wave').addEventListener('click', GreenLightBarrierRitual.triggerManual);
+    GreenLightBarrierRitual.startHourly();
 
     // Snack Corn Puff Spawn
     const puffContainer = document.getElementById('puff-container');
