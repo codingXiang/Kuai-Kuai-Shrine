@@ -1299,11 +1299,12 @@
       };
       let overlayDismissTimer = null;
       let hourlyTimer = null;
-      let lastCelebratedHourKey = getHourKey(new Date());
 
       function getHourKey(date) {
         return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}-${date.getHours()}`;
       }
+
+      let lastCelebratedHourKey = getHourKey(new Date());
 
       function triggerRitual(ritual) {
         try {

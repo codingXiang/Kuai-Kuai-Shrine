@@ -59,7 +59,7 @@ describe('Hourly Green Light Barrier (整點綠光結界)', () => {
     }
   });
 
-  it('triggers hourly green light barrier when crossing HH:00:00 boundary while page is open', () => {
+  it('triggers hourly green light barrier through the ritual interface when crossing HH:00:00 boundary while page is open', () => {
     // 13:59:50 - 10 seconds before 14:00:00
     const initialTime = new Date('2026-08-27T13:59:50');
     loadShrineDom(initialTime);
